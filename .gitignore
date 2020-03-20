@@ -1,0 +1,11 @@
+__pycache__/
+.vscode
+.ipynb_checkpoints
+.DS_Store
+
+*.pyc
+
+# ignore huge datasets
+csense/data/
+
+venv
