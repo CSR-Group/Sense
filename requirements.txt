@@ -1,2 +1,4 @@
 # mining
 PyDictionary==1.5.2
+wikipedia==1.4.0
+spacy==2.1.0

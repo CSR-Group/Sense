@@ -1,5 +1,6 @@
 import unittest
-from context import csense
+import context
+from csense.benchmark import cloze_task
 
 
 class TestDataSet(unittest.TestCase):
@@ -8,7 +9,7 @@ class TestDataSet(unittest.TestCase):
         """
         Test the format of the dataset
         """
-        stories = csense.benchmark.ClozeTask.getDataSet()
+        stories = cloze_task.getDataSet()
         assert(len(stories) == 1571)
 
 if __name__ == '__main__':
