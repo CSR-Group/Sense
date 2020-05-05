@@ -10,14 +10,18 @@ class Edge:
     return "name: " + str(self.name) + ", weight: " + str(self.weight) + ", rel: " + str(self.rel) + ", type: " + str(self.type)
 
 class Node:
-    def __init__(self, name, postag, edges, weight):
+    def __init__(self, name, postag, nodeType, weight, depth):
         self.name = name
         self.postag = postag
-        self.edges = edges
+        self.nodeType = nodeType
         self.weight = weight
+        self.depth = depth
 
     def __str__(self):
-        return "name: " + str(self.name) + "\npostag: " + str(self.postag) + ",\nweight: " + str(self.weight) + ",\nedges: " + str([str(edge) for edge in self.edges])
+        return "name: " + str(self.name) + "\npostag: " + str(self.postag) + ",\nweight: " + str(self.weight) + ",\nnodeType: " + str(self.nodeType)
 
-    def __cmp__(self, other):
-        return self.weight <= other.weight
+    def __gt__(self, other):
+        return self.weight < other.weight
+
+    def __eq__(self, other):
+        return self.weight == other.weight

@@ -22,9 +22,10 @@ class Context:
 
 class Entity:
 
-  def __init__(self, name, properties):
+  def __init__(self, name, properties, is_stop_word):
     self.name = name
     self.properties = {}
+    self.is_stop_word = is_stop_word
 
   def __str__(self):
     return "name: " + str(self.name) + ", properties: " + str([(k, [str(x) for x in self.properties[k]]) for k in self.properties])
@@ -32,16 +33,16 @@ class Entity:
 
 class Subject(Entity):
 
-  def __init__(self, name, properties):
-    super().__init__(name,properties)
+  def __init__(self, name, properties, is_stop_word):
+    super().__init__(name,properties, is_stop_word)
 
 class Action(Entity):
 
-  def __init__(self, name, properties):
-    super().__init__(name,properties)
+  def __init__(self, name, properties, is_stop_word):
+    super().__init__(name,properties, is_stop_word)
     
 
 class Object(Entity):
 
-  def __init__(self, name, properties):
-    super().__init__(name,properties)
+  def __init__(self, name, properties, is_stop_word):
+    super().__init__(name,properties, is_stop_word)
