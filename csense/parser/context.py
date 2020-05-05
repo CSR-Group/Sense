@@ -7,8 +7,7 @@ class Question:
     self.candidates = []
 
   def __str__(self):
-    return "root: " + str(self.root) + ",\n contexts: " + str([str(ctx) for ctx in  self.contexts]) + ",\n candidates: " + str(self.candidates) + ", type: " + str(self.questionType)
-
+    return "root: " + str(self.root) + ",\n contexts: " + str([str(ctx) for ctx in  self.contexts]) + ",\n candidates: " + str(self.candidates) + ",\n type: " + str(self.questionType)
 
 class Context:
     """Context = Subject Action Object set"""
@@ -19,7 +18,7 @@ class Context:
       self.objects = []
 
     def __str__(self):
-      return "subjects: " + str([str(sub) for sub  in self.subjects]) + ", action: " + str(self.action) + ", objects: " + str([str(ob) for ob  in self.objects])
+      return "subjects: " + str([str(sub) for sub  in self.subjects]) + ",action: " + str(self.action) + ",objects: " + str([str(ob) for ob  in self.objects])
 
 class Entity:
 
