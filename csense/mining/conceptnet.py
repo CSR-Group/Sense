@@ -4,22 +4,26 @@ from csense.mining.node import *
 from csense.parser.context import *
 
 def lookup(word):
+    # url = "http://ec2-54-164-171-68.compute-1.amazonaws.com/c/en/" + word + "?offset=0&limit=10000"
     url = "http://conceptnet5.media.mit.edu/data/5.4/c/en/" + word + "?offset=0&limit=10000"
     obj = requests.get(url).json()
+    # print(obj)
     edgeNames = set()
     edges = []
     for edge in obj['edges']:
-        if edge['start'].get('language') and edge['start']['language'] == 'en' and edge['start']['label'] != word:
-            if edge['start']['label'] not in edgeNames:
-                node = Edge(edge['start']['label'], edge['weight'], edge['rel']['label'], 'start')
+        start_term = edge['start']['term'].split('/')[-1]
+        end_term = edge['end']['term'].split('/')[-1]
+        if edge['start'].get('language') and edge['start']['language'] == 'en' and start_term != word:
+            if start_term not in edgeNames:
+                node = Edge(start_term, edge['weight'], edge['rel']['label'], 'start')
                 edges.append(node)
-            edgeNames.add(edge['start']['label'])
+            edgeNames.add(start_term)
 
-        elif edge['end'].get('language') and edge['end']['language'] == 'en' and edge['end']['label'] != word:
-            if edge['end']['label'] not in edgeNames:
-                node = Edge(edge['end']['label'], edge['weight'], edge['rel']['label'], 'end')
+        elif edge['end'].get('language') and edge['end']['language'] == 'en' and end_term != word:
+            if end_term not in edgeNames:
+                node = Edge(end_term, edge['weight'], edge['rel']['label'], 'end')
                 edges.append(node)
-            edgeNames.add(edge['end']['label'])
+            edgeNames.add(end_term)
 
     edges.sort(key=operator.attrgetter('weight'), reverse = True)
 #     for node in edges:
@@ -52,7 +56,6 @@ def related(node):
     # print(obj)
     return obj
 
-# lookup("glass")
 
 # search("scuttlebutt")
 # relatedness("coffee_pot", "tea_kettle")

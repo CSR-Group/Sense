@@ -14,7 +14,7 @@ def getPos(word, doc):
 # conjuctions of pobj
 # conjuctions of subject
 
-def parse(sentence, questionType, candidates, questionConcept):
+def parse(sentence, questionType, candidates):
     doc = nlp(sentence)
     question = Question()
     question.questionType = questionType
@@ -22,8 +22,7 @@ def parse(sentence, questionType, candidates, questionConcept):
     entityToPropMap = {}
     entityToPrepositionPObjMap = {}
     question.candidates = candidates
-    question.questionConcept = questionConcept
-    
+
     # find root 
     for token in doc:
         if(token.dep_ == "ROOT"):
@@ -45,12 +44,14 @@ def parse(sentence, questionType, candidates, questionConcept):
                 entityToPrepositionPObjMap[token.head.text] = []
             entities = []
             for child in token.children:
+                ent = None
                 if(child.pos_ == "NOUN"):
                     ent = Subject(child.text, {}, child.is_stop)
                 if(child.pos_ == "VERB"):
                     ent = Action(child.text, {}, child.is_stop)
+
                 # associate amods of preposition entities. (rent in(prep) glove-shaped(amod) state(ent))
-                if(ent.name in entityToPropMap):
+                if(ent is not None and ent.name in entityToPropMap):
                     if("_" not in ent.properties):
                         ent.properties["_"] = []
                     ent.properties["_"].extend(entityToPropMap[ent.name])
