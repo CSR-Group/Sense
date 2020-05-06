@@ -3,7 +3,11 @@ import operator
 from csense.mining.node import *
 from csense.parser.context import *
 
+mem = {}
+
 def lookup(word):
+    if word in mem:
+        return mem[word]
     # url = "http://ec2-54-164-171-68.compute-1.amazonaws.com/c/en/" + word + "?offset=0&limit=10000"
     url = "http://localhost/c/en/" + word + "?offset=0&limit=10000"
     # url = "http://conceptnet5.media.mit.edu/data/5.4/c/en/" + word + "?offset=0&limit=10000"
@@ -30,6 +34,7 @@ def lookup(word):
 #     for node in edges:
 #         print(node)
 #     print(len(edges))
+    mem[word] = edges
     return edges
 
 
