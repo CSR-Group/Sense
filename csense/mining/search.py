@@ -74,14 +74,14 @@ class HeuristicSearch:
 
         self.questionSearch(questionDepthlimit)
 
-        print("--------")
+        # print("--------")
         max_score = -1
         max_candidate = None
         for candidate in self.candidates:
             if self.candidateScore[candidate] > max_score:
                 max_score = self.candidateScore[candidate]
                 max_candidate = candidate
-            print(candidate, " - ", self.candidateScore[candidate])
+            # print(candidate, " - ", self.candidateScore[candidate])
 
         return max_candidate
 
@@ -100,7 +100,7 @@ class HeuristicSearch:
             weightByNodeMap[frontierNode.name] = frontierNode.weight
 
             if frontierNode.depth < candidateDepthLimit:
-                print("Exploring  - ", frontierNode.name, " - ", frontierNode.weight)
+                # print("Exploring  - ", frontierNode.name, " - ", frontierNode.weight)
                 edges = lookup(frontierNode.name)[0:TOP_N_EDGES]
                 # print("Edges  - ", str([str(edge) for edge in edges]))
 
@@ -142,7 +142,7 @@ class HeuristicSearch:
 
             # Explore
             if frontierNode.depth < depth_limit:
-                print("Exploring  - ", frontierNode.name , " - ", frontierNode.weight)
+                # print("Exploring  - ", frontierNode.name , " - ", frontierNode.weight)
                 edges = lookup(frontierNode.name)[0:TOP_N_EDGES]
                 # print("Edges  - ", str([str(edge) for edge in edges]))
 

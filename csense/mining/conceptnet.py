@@ -5,7 +5,8 @@ from csense.parser.context import *
 
 def lookup(word):
     # url = "http://ec2-54-164-171-68.compute-1.amazonaws.com/c/en/" + word + "?offset=0&limit=10000"
-    url = "http://conceptnet5.media.mit.edu/data/5.4/c/en/" + word + "?offset=0&limit=10000"
+    url = "http://localhost/c/en/" + word + "?offset=0&limit=10000"
+    # url = "http://conceptnet5.media.mit.edu/data/5.4/c/en/" + word + "?offset=0&limit=10000"
     obj = requests.get(url).json()
     # print(obj)
     edgeNames = set()
