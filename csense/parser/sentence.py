@@ -40,6 +40,7 @@ def parse(sentence, questionType, candidates):
     # associate prepositions
     for token in doc:
         if token.dep_ == 'prep':
+            print(token.dep_)
             if token.head.text not in entityToPrepositionPObjMap:
                 entityToPrepositionPObjMap[token.head.text] = []
             entities = []
