@@ -1,7 +1,7 @@
 import requests
 import operator
-# from csense.mining.node import *
-# from csense.parser.context import *
+from csense.mining.node import *
+from csense.parser.context import *
 
 mem = {}
 
