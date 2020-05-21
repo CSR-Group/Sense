@@ -51,11 +51,7 @@ def main():
     dataset = getSplitDataSet()
     futures = []
 
-<<<<<<< HEAD
-    questions = dataset["what"][0:1]
-=======
     questions = dataset["where"]
->>>>>>> 16d9190a7081a47ae6bf027adf61ccf2c76a62a3
 
     for index in range(0, len(questions)):
         res = executor.submit(task, questions[index], index)
