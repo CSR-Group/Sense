@@ -9,8 +9,8 @@ def lookup(word):
     if word in mem:
         return mem[word]
     # url = "http://ec2-54-164-171-68.compute-1.amazonaws.com/c/en/" + word + "?offset=0&limit=10000"
-    # url = "http://localhost/c/en/" + word + "?offset=0&limit=10000"
-    url = "http://conceptnet5.media.mit.edu/data/5.4/c/en/" + word + "?offset=0&limit=10000"
+    url = "http://localhost/c/en/" + word + "?offset=0&limit=10000"
+    # url = "http://conceptnet5.media.mit.edu/data/5.4/c/en/" + word + "?offset=0&limit=10000"
     obj = requests.get(url).json()
     # print(obj)
     edgeNames = set()
@@ -42,10 +42,11 @@ def search(word):
     # url = "http://conceptnet5.media.mit.edu/data/5.4/c/en" + word + "?rel=/r/AtLocation&limit=1000"
     # url = "http://conceptnet5.media.mit.edu/data/5.4/search?rel=/r/AtLocation&start=/c/en/" + word + "&limit=1000"
     # url1 = "http://conceptnet5.media.mit.edu/data/5.4/search?rel=/r/AtLocation&end=/c/en/" + word + "&limit=1000"
-    url = "http://ec2-54-164-171-68.compute-1.amazonaws.com/search?rel=/r/AtLocation&end=/c/en/" + word + "&limit=1000"
-    url1 = "http://ec2-54-164-171-68.compute-1.amazonaws.com/search?rel=/r/AtLocation&end=/c/en/" + word + "&limit=1000"
+    # url = "http://localhost/search?rel=/r/AtLocation&end=/c/en/" + word + "&limit=1000"
+    url = "http://localhost/search?rel=/r/AtLocation&end=/c/en/" + word + "&limit=1000"
     obj = requests.get(url).json()
-    obj1 = requests.get(url1).json()
+    #obj1 = requests.get(url1).json()
+    obj1 = obj
 
     # print(obj['edges'])
     # print(len(obj['edges']))

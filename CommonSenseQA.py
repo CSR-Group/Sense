@@ -20,7 +20,7 @@ def parseQuestion(question):
 def task(rawQuestion, index):
     # print("Executing our Task")
     try:
-        outfile = open("outfile.txt", mode="a+")
+        outfile = open("outfile_SA1_where.txt", mode="a+")
         question, candidate, correctAnswer = parseQuestion(rawQuestion)
         parsedSentence = parse(question, "WHERE", candidate)
         search = HeuristicSearch(parsedSentence)
@@ -47,7 +47,7 @@ def main():
     dataset = getSplitDataSet()
     futures = []
 
-    questions = dataset["what"][0:10]
+    questions = dataset["where"]
 
     for index in range(0, len(questions)):
         res = executor.submit(task, questions[index], index)

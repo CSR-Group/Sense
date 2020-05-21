@@ -12,11 +12,11 @@ nlp = spacy.load("en_core_web_sm")
 def task(rawQuestion, index):
     # print("Executing our Task")
     try:
-        outfile = open("outfile_temp.txt", mode="a+")
+        outfile = open("outfile_temp2.txt", mode="a+")
         count, count1, guessAnswer, guessAnswer1, correctAnswer = scoreCandidates(rawQuestion)
         print(index, " - ", correctAnswer, " - ", guessAnswer, " - " ,guessAnswer1, file=outfile)
         print(index, " - ", correctAnswer, " - ", guessAnswer, " - " ,guessAnswer1)
-        if count == 1 or count1 == 1:
+        if count == 1:
             print("#RES:1:",index, file=outfile)
             return 1
         else:
@@ -126,8 +126,8 @@ def main():
 
     questions = dataset["where"]
 
-    # for index in range(0, len(questions)):
-    for index in range(1619,1620):
+    for index in range(0, len(questions)):
+    # for index in range(1619,1620):
         res = executor.submit(task, questions[index], index)
         futures.append(res)
 
