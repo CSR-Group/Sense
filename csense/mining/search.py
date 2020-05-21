@@ -2,6 +2,7 @@ from csense.mining.node import *
 from csense.parser.sentence import parse
 from queue import PriorityQueue
 from csense.mining.conceptnet import lookup
+from csense.mining.conceptnet import relatedness
 
 import spacy
 nlp = spacy.load("en_core_web_sm")
@@ -14,6 +15,44 @@ TOP_N_EDGES = 20
 
 # Populating nodeQueue for BFS
 
+
+class RelatednessSearch:
+
+    def __init__(self, parsedSentence):
+
+        self.candidates = []
+        self.candidateScore = {}
+        self.parsedSentence = parsedSentence
+
+        for candidate in parsedSentence.candidates:
+            self.candidates.append(candidate)
+            self.candidateScore[candidate] = 0
+
+    def run(self):
+        for context in self.parsedSentence.contexts:
+            for subject in context.subjects:
+                if not subject.is_stop_word or SEARCH_STOP_WORDS:
+                    for candidate in self.candidates:
+                        self.candidateScore[candidate] += relatedness(candidate, subject.name)
+
+            if not context.action.is_stop_word or SEARCH_STOP_WORDS:
+                for candidate in self.candidates:
+                    self.candidateScore[candidate] += relatedness(candidate, context.action.name)
+
+            for obj in context.objects:
+                if not obj.is_stop_word or SEARCH_STOP_WORDS:
+                    for candidate in self.candidates:
+                        self.candidateScore[candidate] += relatedness(candidate, obj.name)
+
+        max_score = -1
+        max_candidate = None
+        for candidate in self.candidates:
+            if self.candidateScore[candidate] > max_score:
+                max_score = self.candidateScore[candidate]
+                max_candidate = candidate
+            # print(candidate, " - ", self.candidateScore[candidate])
+
+        return max_candidate
 
 class HeuristicSearch:
 
