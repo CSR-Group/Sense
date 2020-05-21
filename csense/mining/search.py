@@ -85,9 +85,11 @@ class HeuristicSearch:
                 # Adding properties to Node Queue
                 propKeys  = subject.properties.keys()
                 prop = subject.properties
+                print("propKeys:",propKeys)
+                print("prop",prop)
                 for key in propKeys:
                     for val in prop[key]:
-                        self.nodeQueue.put(self.getInitialEntity(val,
+                        self.nodeQueue.put(self.getInitialEntity(val.name,
                                                                 QUESTION_NODE_TYPE,
                                                                 DEFAULT_QUESTION_NODE_HEURISTIC_WEIGHT))
 
@@ -109,11 +111,12 @@ class HeuristicSearch:
                 prop = obj.properties
                 for key in propKeys:
                     for val in prop[key]:
-                        self.nodeQueue.put(self.getInitialEntity(val,
+                        self.nodeQueue.put(self.getInitialEntity(val.name,
                                                                 QUESTION_NODE_TYPE,
                                                                 DEFAULT_QUESTION_NODE_HEURISTIC_WEIGHT))
 
     def getInitialEntity(self, entity, type, weight):
+        print(entity)
         entity_name = entity.replace(' ', '_')
         doc = nlp(entity)
         postag = ''

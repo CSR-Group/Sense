@@ -2,6 +2,7 @@ from csense.parser.sentence import parse
 from csense.mining.search import HeuristicSearch
 from csense.mining.conceptnet import lookup
 from csense.benchmark.cqa import getSplitDataSet
+import traceback
 
 from concurrent.futures import ThreadPoolExecutor
 import threading
@@ -34,7 +35,10 @@ def task(rawQuestion, index):
         else:
             print("#RES:0:",index, file=outfile)
             return 0
-    except:
+    except Exception as e:
+        track = traceback.format_exc()
+        print(track)
+        print(e)
         print(index, ":FAILED")
         print("#RES:F:",index, file=outfile)
         return 0
@@ -42,12 +46,12 @@ def task(rawQuestion, index):
         outfile.close()
 
 def main():
-    executor = ThreadPoolExecutor(max_workers=10)
+    executor = ThreadPoolExecutor(max_workers=1)
 
     dataset = getSplitDataSet()
     futures = []
 
-    questions = dataset["what"][0:10]
+    questions = dataset["what"][0:1]
 
     for index in range(0, len(questions)):
         res = executor.submit(task, questions[index], index)
