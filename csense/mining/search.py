@@ -89,9 +89,14 @@ class HeuristicSearch:
                 print("prop",prop)
                 for key in propKeys:
                     for val in prop[key]:
-                        self.nodeQueue.put(self.getInitialEntity(val.name,
-                                                                QUESTION_NODE_TYPE,
-                                                                DEFAULT_QUESTION_NODE_HEURISTIC_WEIGHT))
+                        if isinstance(val, str):
+                            self.nodeQueue.put(self.getInitialEntity(val,
+                                                                     QUESTION_NODE_TYPE,
+                                                                     DEFAULT_QUESTION_NODE_HEURISTIC_WEIGHT))
+                        else:
+                            self.nodeQueue.put(self.getInitialEntity(va.lname,
+                                                                    QUESTION_NODE_TYPE,
+                                                                    DEFAULT_QUESTION_NODE_HEURISTIC_WEIGHT))
 
 
             # Adding Action to Node Queue
@@ -111,9 +116,14 @@ class HeuristicSearch:
                 prop = obj.properties
                 for key in propKeys:
                     for val in prop[key]:
-                        self.nodeQueue.put(self.getInitialEntity(val.name,
-                                                                QUESTION_NODE_TYPE,
-                                                                DEFAULT_QUESTION_NODE_HEURISTIC_WEIGHT))
+                        if isinstance(val, str):
+                            self.nodeQueue.put(self.getInitialEntity(val,
+                                                                    QUESTION_NODE_TYPE,
+                                                                    DEFAULT_QUESTION_NODE_HEURISTIC_WEIGHT))
+                        else:
+                            self.nodeQueue.put(self.getInitialEntity(val.name,
+                                                                    QUESTION_NODE_TYPE,
+                                                                    DEFAULT_QUESTION_NODE_HEURISTIC_WEIGHT))
 
     def getInitialEntity(self, entity, type, weight):
         print(entity)
