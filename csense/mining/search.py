@@ -70,7 +70,6 @@ class HeuristicSearch:
             self.candidates.append(candidate)
             self.candidateScore[candidate] = 0
 
-
         # for candidate in parsedSentence.candidates:
         #     self.candidateScore[candidate] = 0
         #     self.candidateNodes[candidate] = set()
@@ -83,6 +82,15 @@ class HeuristicSearch:
                     self.nodeQueue.put(self.getInitialEntity(subject.name,
                                                              QUESTION_NODE_TYPE,
                                                              DEFAULT_QUESTION_NODE_HEURISTIC_WEIGHT))
+                # Adding properties to Node Queue
+                propKeys  = subject.properties.keys()
+                prop = subject.properties
+                for key in propKeys:
+                    for val in prop[key]:
+                        self.nodeQueue.put(self.getInitialEntity(val,
+                                                                QUESTION_NODE_TYPE,
+                                                                DEFAULT_QUESTION_NODE_HEURISTIC_WEIGHT))
+
 
             # Adding Action to Node Queue
             if not context.action.is_stop_word or SEARCH_STOP_WORDS:
@@ -96,6 +104,14 @@ class HeuristicSearch:
                     self.nodeQueue.put(self.getInitialEntity(obj.name,
                                                              QUESTION_NODE_TYPE,
                                                              DEFAULT_QUESTION_NODE_HEURISTIC_WEIGHT))
+                # Adding properties to Node Queue
+                propKeys  = obj.properties.keys()
+                prop = obj.properties
+                for key in propKeys:
+                    for val in prop[key]:
+                        self.nodeQueue.put(self.getInitialEntity(val,
+                                                                QUESTION_NODE_TYPE,
+                                                                DEFAULT_QUESTION_NODE_HEURISTIC_WEIGHT))
 
     def getInitialEntity(self, entity, type, weight):
         entity_name = entity.replace(' ', '_')
