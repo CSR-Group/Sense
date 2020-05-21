@@ -43,7 +43,8 @@ def search(word):
     # url = "http://conceptnet5.media.mit.edu/data/5.4/search?rel=/r/AtLocation&start=/c/en/" + word + "&limit=1000"
     # url1 = "http://conceptnet5.media.mit.edu/data/5.4/search?rel=/r/AtLocation&end=/c/en/" + word + "&limit=1000"
     # url = "http://localhost/search?rel=/r/AtLocation&end=/c/en/" + word + "&limit=1000"
-    url = "http://localhost/search?rel=/r/AtLocation&end=/c/en/" + word + "&limit=1000"
+    # url = "http://localhost/search?rel=/r/AtLocation&end=/c/en/" + word + "&limit=1000"
+    url = "http://localhost/search?rel=/r/IsA&end=/c/en/" + word + "&limit=1000"
     obj = requests.get(url).json()
     #obj1 = requests.get(url1).json()
     obj1 = obj
