@@ -46,7 +46,7 @@ def task(rawQuestion, index):
         outfile.close()
 
 def main():
-    executor = ThreadPoolExecutor(max_workers=1)
+    executor = ThreadPoolExecutor(max_workers=10)
 
     dataset = getSplitDataSet()
     futures = []
